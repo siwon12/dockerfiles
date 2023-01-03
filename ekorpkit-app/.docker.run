@@ -1,0 +1,18 @@
+#!/bin/bash
+RELEASE_TYPE=${RELEASE_TYPE:-"frontend"}
+VERSION=${VERSION:-"latest"}
+VARIANT=${VARIANT:-""}
+USERNAME=${USERNAME:-"entelecheia"}
+NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-"device=0"}
+
+RUN_ARGS=" --net $EKORPKIT_APP_DOCKER_NETWORK"
+RUN_ARGS="${RUN_ARGS} --volume $HOST_WORKSPACE_ROOT:$WORKSPACE_ROOT"
+if [[ "${RELEASE_TYPE}" == "backend" ]]; then
+    RUN_ARGS="${RUN_ARGS} --runtime=nvidia --gpus ${NVIDIA_VISIBLE_DEVICES}"
+    RUN_ARGS="${RUN_ARGS} --ulimit memlock=-1 --ulimit stack=67108864"
+    RUN_ARGS="${RUN_ARGS} --publish $BACKEND_HOST_PORT:$BACKEND_DOCKER_PORT"
+    RUN_ARGS="${RUN_ARGS} --volume ${BUILD_PATH}/backend/${BACKEND_APP_DIR}:${BACKEND_APP_DIR}"
+elif [[ "${RELEASE_TYPE}" == "frontend" ]]; then
+    RUN_ARGS="${RUN_ARGS} --publish $FRONTEND_HOST_PORT:FRONTEND_DOCKER_PORT"
+    RUN_ARGS="${RUN_ARGS} --volume ${BUILD_PATH}/frontend/${FRONTEND_APP_DIR}:${FRONTEND_APP_DIR}"
+fi
