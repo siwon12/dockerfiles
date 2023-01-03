@@ -2,18 +2,20 @@
 RELEASE_TYPE=${RELEASE_TYPE:-"runtime"}
 VERSION=${VERSION:-"latest"}
 VARIANT=${VARIANT:-"pytorch1.11"}
-VARIANT_FROM="pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime"
+USERNAME=${USERNAME:-"entelecheia"}
+
+BUILD_FROM="pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime"
 PACKAGE_VERSION=""
 PRE_OPTION=""
 BUILD_ARGS=""
 
 if [[ "${RELEASE_TYPE}" == "runtime" ]]; then
     if [[ "${VARIANT}" == "nvidia-pytorch22.02" ]]; then
-        VARIANT_FROM="nvcr.io/nvidia/pytorch:22.02-py3"
+        BUILD_FROM="nvcr.io/nvidia/pytorch:22.02-py3"
     fi
 else
     TAG="${VERSION}-${VARIANT}-runtime"
-    VARIANT_FROM="entelecheia/ekorpkit:${TAG}"
+    BUILD_FROM="${USERNAME}/ekorpkit:${TAG}"
 fi
 if [[ "${VERSION}" == "latest" ]]; then
     PACKAGE_VERSION=""
@@ -26,7 +28,7 @@ elif [[ -n "${VERSION}" ]]; then
     PRE_OPTION=""
 fi
 
-BUILD_ARGS="--build-arg VARIANT_FROM='${VARIANT_FROM}' "
+BUILD_ARGS="--build-arg BUILD_FROM='${BUILD_FROM}' "
 if [[ -n "${PACKAGE_VERSION}" ]]; then
     BUILD_ARGS="${BUILD_ARGS} --build-arg PACKAGE_VERSION='${PACKAGE_VERSION}' "
 fi

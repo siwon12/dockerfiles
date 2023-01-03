@@ -1,5 +1,5 @@
-ARG VARIANT_FROM="pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime"
-FROM $VARIANT_FROM
+ARG BUILD_FROM="pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime"
+FROM $BUILD_FROM
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Seoul
