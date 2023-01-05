@@ -1,6 +1,9 @@
 ARG BUILD_FROM="entelecheia/ekorpkit:latest-pytorch1.11-runtime"
 FROM $BUILD_FROM
 
+RUN pip install --upgrade --no-cache-dir pip && \
+    pip install --no-cache-dir fastapi uvicorn
+
 # Set up environment variables
 ENV WORK_DIR=/app
 ENV EKORPKIT_CONFIG_DIR=$WORK_DIR/config

@@ -3,14 +3,14 @@ version: '3'
 services:
   frontend:
     build:
-      context: ${BUILD_PATH}
-      dockerfile: $DOCKERFILE_DIR/Dockerfile.frontend
+      context: .
+      dockerfile: ./Dockerfile.frontend
       args:
         BUILD_FROM: $FRONTEND_BUILD_FROM
     image: $FRONTEND_DOCKER_IMAGE_NAME
     container_name: $FRONTEND_DOCKER_CONTAINER_NAME
     env_file:
-      - $BUILD_PATH/frontend/.env
+      - ./frontend/.env
     ports:
       - "$FRONTEND_HOST_PORT:$FRONTEND_DOCKER_PORT"
     volumes:
@@ -18,14 +18,14 @@ services:
         - ${BUILD_PATH}/frontend/${FRONTEND_APP_DIR}:${FRONTEND_APP_DIR}
   backend:
     build:
-      context: ${BUILD_PATH}
-      dockerfile: $DOCKERFILE_DIR/Dockerfile.backend
+      context: .
+      dockerfile: ./Dockerfile.backend
       args:
         BUILD_FROM: $BACKEND_BUILD_FROM
     image: $BACKEND_DOCKER_IMAGE_NAME
     container_name: $BACKEND_DOCKER_CONTAINER_NAME
     env_file:
-      - $BUILD_PATH/backend/.env
+      - ./backend/.env
     ulimits:
       stack: 67108864
       memlock: -1
