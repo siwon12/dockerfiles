@@ -4,10 +4,10 @@ FROM $BUILD_FROM
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Seoul
 
-RUN apt-get update \
-    && apt-get install -y fontconfig fonts-nanum tzdata \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN sudo apt-get update \
+    && sudo apt-get install -y fontconfig fonts-nanum tzdata \
+    && sudo apt-get clean \
+    && sudo rm -rf /var/lib/apt/lists/*
 
 # install dotfiles
 ARG USER_FULLNAME=""
@@ -21,11 +21,6 @@ ENV WORKSPACE_LOCATION="/"
 ENV APPLY_ROOTMOI=0
 ENV REMOTE_CONTAINERS=1
 # ENV DOTFILES_DEBUG=1
-RUN rm -rf /workspace && mkdir -p /workspace
-RUN sh -c "$(wget -qO- https://bit.ly/3W2JGyL)"
-# Set up environment variables
-ENV EKORPKIT_SRC_DIR=/workspace/projects/ekorpkit
-WORKDIR $EKORPKIT_SRC_DIR
+# RUN sudo sh -c "$(wget -qO- https://bit.ly/3W2JGyL)"
 
-
-CMD ["zsh"]
+# CMD ["zsh"]
