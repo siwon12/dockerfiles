@@ -5,7 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Seoul
 
 RUN sudo apt-get update \
-    && sudo apt-get install -y fontconfig fonts-nanum tzdata \
+    && sudo apt-get install -y fontconfig fonts-nanum tzdata locales \
     && sudo apt-get clean \
     && sudo rm -rf /var/lib/apt/lists/*
 
@@ -13,14 +13,16 @@ RUN sudo apt-get update \
 ARG USER_FULLNAME=""
 ARG USER_EMAIL=""
 ARG GITHUB_USERNAME=""
+ARG SYSTEM_HOSTNANE="devcon-arm64"
 
-ENV USER_FULLNAME $USER_FULLNAME
-ENV USER_EMAIL $USER_EMAIL
-ENV GITHUB_USERNAME $GITHUB_USERNAME
+ENV USER_FULLNAME=$USER_FULLNAME
+ENV USER_EMAIL=$USER_EMAIL
+ENV GITHUB_USERNAME=$GITHUB_USERNAME
+ENV SYSTEM_HOSTNAME=$SYSTEM_HOSTNAME
 ENV WORKSPACE_LOCATION="/"
 ENV APPLY_ROOTMOI=0
 ENV REMOTE_CONTAINERS=1
-# ENV DOTFILES_DEBUG=1
-# RUN sudo sh -c "$(wget -qO- https://bit.ly/3W2JGyL)"
 
-# CMD ["zsh"]
+RUN sh -c "$(wget -qO- https://bit.ly/3W2JGyL)"
+
+CMD ["zsh"]

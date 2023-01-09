@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile.arm64
       args:
         BUILD_FROM: $ARM64_BUILD_FROM
-    image: $ARM64_DOCKER_IMAGE_NAME
-    container_name: $ARM64_DOCKER_CONTAINER_NAME
+    image: $ARM64_IMAGE_NAME
+    container_name: $ARM64_CONTAINER_NAME
     env_file:
       - .env
     ulimits:
@@ -20,5 +20,5 @@ services:
         - $WORKSPACE_ROOT:$DOCKER_WORKSPACE_ROOT
 networks:
   default:
-    name: $DOCKER_NETWORK_NAME
+    name: $NETWORK_NAME
     external: true
