@@ -4,7 +4,7 @@ services:
   ekorpkit:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: .docker/Dockerfile
       args:
         BUILD_FROM: $BUILD_FROM
         PIP_PACKAGE_NAME: $PIP_PACKAGE_NAME
@@ -15,11 +15,7 @@ services:
     ulimits:
       stack: 67108864
       memlock: -1
-    ports:
-      - "$HOST_SSH_PORT:22"
-    volumes:
-        - $WORKSPACE_ROOT:$DOCKER_WORKSPACE_ROOT
 networks:
   default:
-    name: $NETWORK_NAME
+    name: $DOCKER_NETWORK_NAME
     external: true
