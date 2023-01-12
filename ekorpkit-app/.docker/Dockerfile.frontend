@@ -1,14 +1,14 @@
 ARG BUILD_FROM="python:3.10.1-slim"
 FROM $BUILD_FROM
 
-ENV WORK_DIR=/app
+ENV WORK_DIR="/app"
 WORKDIR $WORK_DIR
-
 RUN pip install --upgrade --no-cache-dir pip && \
-    pip install --no-cache-dir streamlit
+    pip install --no-cache-dir streamlit protobuf
 
 COPY ./frontend/app/ .
 
 EXPOSE 8501
+ENV ROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION="python"
 
 CMD ["bash", "./run-app.sh"]
