@@ -33,7 +33,9 @@ services:
     ports:
       - "$BACKEND_HOST_PORT:$BACKEND_DOCKER_PORT"
     volumes:
-        # - $WORKSPACE_ROOT:$CONTAINER_WORKSPACE_ROOT
+        - $WORKSPACE_ROOT:$CONTAINER_WORKSPACE_ROOT
+        - "$HOME/.cache/huggingface:/root/.cache/huggingface"
+        - "$HOME/.huggingface:/root/.huggingface"
         - ${BUILD_PATH}/backend/${BACKEND_APP_DIR}:${BACKEND_APP_DIR}
     deploy:
       resources:
