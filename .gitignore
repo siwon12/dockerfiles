@@ -1,1 +1,5 @@
-.env
+# Dot env files #
+.env*
+!.env.project
+!.env.vault
+!.env.example
