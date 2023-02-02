@@ -48,6 +48,16 @@ services:
             - driver: nvidia
               device_ids: ["${CUDA_DEVICE_ID}"]
               capabilities: [gpu]
+  ngrok:
+    image: wernight/ngrok:latest
+    ports:
+      - 4841
+    environment:
+      NGROK_AUTH: $NGROK_AUTH
+      NGROK_PORT: $NGROK_PORT
+      NGROK_PROTOCOL: $NGROK_PROTOCOL
+    depends_on:
+      - workspace
 networks:
   default:
     name: $DOCKER_NETWORK_NAME
