@@ -9,8 +9,6 @@ services:
         BUILD_FROM: $FRONTEND_BUILD_FROM
     image: $FRONTEND_DOCKER_IMAGE_NAME
     container_name: $FRONTEND_DOCKER_CONTAINER_NAME
-    env_file:
-      - $FRONTEND_ENV_FILE
     ports:
       - "$FRONTEND_HOST_PORT:$FRONTEND_DOCKER_PORT"
     volumes:
@@ -24,8 +22,9 @@ services:
         BUILD_FROM: $BACKEND_BUILD_FROM
     image: $BACKEND_DOCKER_IMAGE_NAME
     container_name: $BACKEND_DOCKER_CONTAINER_NAME
-    env_file:
-      - $BACKEND_ENV_FILE
+    environment:
+      HUGGING_FACE_HUB_TOKEN: $HUGGING_FACE_HUB_TOKEN
+      CUDA_VISIBLE_DEVICES: $CUDA_VISIBLE_DEVICES
     ipc: host
     ulimits:
       stack: 67108864
@@ -33,9 +32,9 @@ services:
     ports:
       - "$BACKEND_HOST_PORT:$BACKEND_DOCKER_PORT"
     volumes:
-        - $WORKSPACE_ROOT:$CONTAINER_WORKSPACE_ROOT
         - "$HOME/.cache/huggingface:/root/.cache/huggingface"
         - "$HOME/.huggingface:/root/.huggingface"
+        - $WORKSPACE_ROOT:$CONTAINER_WORKSPACE_ROOT
         - ${BUILD_PATH}/backend/${BACKEND_APP_DIR}:${BACKEND_APP_DIR}
     deploy:
       resources:
