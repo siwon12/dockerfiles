@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  tunnel:
+    image: wernight/ngrok:latest
+    network_mode: host
+    command: 
+      - sh
+      - /home/ngrok/scripts/ngrok-start.sh
+    volumes:
+      - ${BUILD_PATH}/scripts:/home/ngrok/scripts
+    environment:
+      HOST_PORT: $HOST_PORT
+      NGROK_AUTH: $NGROK_AUTH
+      NGROK_PORT: $NGROK_PORT
+      NGROK_PROTOCOL: $NGROK_PROTOCOL
