@@ -8,7 +8,7 @@ services:
       - sh
       - /home/ngrok/scripts/ngrok-start.sh
     volumes:
-      - ${BUILD_PATH}/scripts:/home/ngrok/scripts
+      - ${PWD}/.docker/scripts:/home/ngrok/scripts
     environment:
       HOST_PORT: $HOST_PORT
       NGROK_AUTH: $NGROK_AUTH
