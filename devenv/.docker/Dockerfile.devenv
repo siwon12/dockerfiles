@@ -62,12 +62,12 @@ RUN sudo chown -R $USERNAME:$USERNAME $WORKSPACE_ROOT
 RUN sh -c "$(wget -qO- https://dotfiles.entelecheia.cc/install)"
 
 # install requirements
-COPY requirements-dev.txt .
+COPY .docker/scripts/requirements-dev.txt .
 RUN pip install --no-cache-dir -r requirements-dev.txt
 
 # set workdir to user home
 WORKDIR /home/$USERNAME
-COPY ./scripts/devenv-entrypoint.sh ./
+COPY .docker/scripts/devenv-entrypoint.sh ./
 RUN sudo chmod 755 ./devenv-entrypoint.sh
 
 WORKDIR $WORKSPACE_ROOT
