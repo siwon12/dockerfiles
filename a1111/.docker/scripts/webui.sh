@@ -19,7 +19,7 @@ install_dir="/home/$(whoami)/workspace/projects"
 #export GIT="git"
 
 # python3 venv without trailing slash (defaults to ${install_dir}/${clone_dir}/venv)
-venv_dir=".venv"
+# venv_dir="venv"
 
 # script to launch to start the app
 #export LAUNCH_SCRIPT="launch.py"
@@ -183,13 +183,22 @@ else
     }
 fi
 
-printf "\n%s\n" "${delimiter}"
-printf "Create and activate python venv"
-printf "\n%s\n" "${delimiter}"
 cd "${install_dir}"/"${clone_dir}"/ || {
     printf "\e[1m\e[31mERROR: Can't cd to %s/%s/, aborting...\e[0m" "${install_dir}" "${clone_dir}"
     exit 1
 }
+printf "\n%s\n" "${delimiter}"
+printf "Check out nvtorch branch"
+printf "\n%s\n" "${delimiter}"
+"${GIT}" fetch --all
+"${GIT}" checkout nvtorch || {
+    printf "\e[1m\e[31mERROR: Can't checkout nvtorch branch, aborting...\e[0m"
+    exit 1
+}
+
+printf "\n%s\n" "${delimiter}"
+printf "Create and activate python venv"
+printf "\n%s\n" "${delimiter}"
 if [[ ! -d "${venv_dir}" ]]; then
     "${python_cmd}" -m venv "${venv_dir}"
 fi
