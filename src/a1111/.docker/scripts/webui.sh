@@ -4,7 +4,7 @@
 #########################################################
 
 # Install directory without trailing slash
-install_dir="/home/$(whoami)/workspace/projects"
+install_dir=${SDW_INSTALL_DIR:-"/home/$(whoami)/workspace/projects"}
 
 # Name of the subdirectory
 #clone_dir="stable-diffusion-webui"
@@ -176,7 +176,7 @@ else
     printf "\n%s\n" "${delimiter}"
     printf "Clone stable-diffusion-webui"
     printf "\n%s\n" "${delimiter}"
-    "${GIT}" clone https://github.com/entelecheia/stable-diffusion-webui.git "${clone_dir}"
+    "${GIT} clone ${SDW_REPO_URL} ${clone_dir}"
     cd "${clone_dir}"/ || {
         printf "\e[1m\e[31mERROR: Can't cd to %s/%s/, aborting...\e[0m" "${install_dir}" "${clone_dir}"
         exit 1
@@ -188,11 +188,11 @@ cd "${install_dir}"/"${clone_dir}"/ || {
     exit 1
 }
 printf "\n%s\n" "${delimiter}"
-printf "Check out nvtorch branch"
+printf "Check out %s branch" "${SDW_BRANCH}"
 printf "\n%s\n" "${delimiter}"
 "${GIT}" fetch --all
-"${GIT}" checkout nvtorch || {
-    printf "\e[1m\e[31mERROR: Can't checkout nvtorch branch, aborting...\e[0m"
+"${GIT}" checkout "${SDW_BRANCH}" || {
+    printf "\e[1m\e[31mERROR: Can't checkout %s branch, aborting...\e[0m" "${SDW_BRANCH}"
     exit 1
 }
 
