@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.2.1 (2023-05-09)
+### Fix
+* **devenv:** Update development environment variables ([`24dbd8f`](https://github.com/entelecheia/dockerfiles/commit/24dbd8f9cb906c7cd5d8198cc6e514c46e1154d4))
+
 ## v0.2.0 (2023-05-09)
 ### Feature
 * **docker:** Update docker-compose and global.env files ([`ba61401`](https://github.com/entelecheia/dockerfiles/commit/ba614011dee066e4c5f5a5c582110ddaf37ccdce))
