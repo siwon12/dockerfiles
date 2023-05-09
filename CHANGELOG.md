@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.2.3 (2023-05-09)
+### Fix
+* **a1111:** Move webui.env file to a scripts directory ([`5809110`](https://github.com/entelecheia/dockerfiles/commit/5809110bd3c8e87b4c2a0cb56e8ebc994cde1ece))
+
 ## v0.2.2 (2023-05-09)
 ### Fix
 * **a1111:** Add webui.env file with SDW variables ([`7dc5f06`](https://github.com/entelecheia/dockerfiles/commit/7dc5f066fba30a7ef0bc38d0fe65fb5b2875d2e5))
