@@ -61,6 +61,13 @@ RUN sudo rm -rf $WORKSPACE_ROOT && sudo mkdir -p $WORKSPACE_ROOT
 RUN sudo chown -R $USERNAME:$USERNAME $WORKSPACE_ROOT
 RUN sh -c "$(wget -qO- https://dotfiles.entelecheia.ai/install)"
 
+# install requirements
+# (Optional) Makes the build much faster
+RUN pip install ninja
+# Set TORCH_CUDA_ARCH_LIST if running and building on different GPU types
+RUN pip install -v -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
+# (this can take dozens of minutes)
+
 # set workdir to user home
 WORKDIR /home/$USERNAME
 COPY .docker/scripts ./scripts
