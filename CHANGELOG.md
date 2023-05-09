@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.2.6 (2023-05-09)
+### Fix
+* Update webui.sh to copy modified code to the source dir ([`a9334fe`](https://github.com/entelecheia/dockerfiles/commit/a9334fe9088f7f0058519ab26a266c1b9fffe0db))
+
 ## v0.2.5 (2023-05-09)
 ### Fix
 * **a1111-webui:** Add listen flag to launch command ([`7ed98dc`](https://github.com/entelecheia/dockerfiles/commit/7ed98dc479b871acbd0f549368fe62087863b880))
