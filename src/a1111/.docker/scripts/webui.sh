@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+set -o allexport
+source "${HOME}/scripts/webui.env"
+set +o allexport
+
 #########################################################
 # Uncomment and change the variables below to your need:#
 #########################################################
