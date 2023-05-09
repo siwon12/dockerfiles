@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.2.5 (2023-05-09)
+### Fix
+* **a1111-webui:** Add listen flag to launch command ([`7ed98dc`](https://github.com/entelecheia/dockerfiles/commit/7ed98dc479b871acbd0f549368fe62087863b880))
+
 ## v0.2.4 (2023-05-09)
 ### Fix
 * **docker:** Update webui.sh to remove --share flag from launch script arguments ([`945440f`](https://github.com/entelecheia/dockerfiles/commit/945440f8f6075ba345998ed4cdc43d1e1ecc6491))
