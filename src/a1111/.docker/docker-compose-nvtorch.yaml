@@ -20,8 +20,8 @@ services:
     hostname: $CONTAINER_HOSTNAME
     command:
       - bash
-      - /home/$USERNAME/scripts/devenv-entrypoint.sh
-      # - /home/$USERNAME/scripts/webui.sh
+      # - /home/$USERNAME/scripts/devenv-entrypoint.sh
+      - /home/$USERNAME/scripts/webui.sh --share
     environment:
       HOST_JUPYTER_PORT: $HOST_JUPYTER_PORT
       JUPYTER_TOKEN: $JUPYTER_TOKEN
