@@ -45,6 +45,7 @@ services:
       - "$HOME/.cache/huggingface:/home/$USERNAME/.cache/huggingface"
       - "$HOME/.huggingface:/home/$USERNAME/.huggingface"
       - "$WORKSPACE_ROOT:$CONTAINER_WORKSPACE_ROOT"
+      - "$PWD/.docker/scripts:/home/$USERNAME/scripts"
     deploy:
       resources:
         reservations:

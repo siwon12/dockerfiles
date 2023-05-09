@@ -70,7 +70,7 @@ RUN pip install -v -U git+https://github.com/facebookresearch/xformers.git@main#
 
 # set workdir to user home
 WORKDIR /home/$USERNAME
-COPY .docker/scripts ./scripts
+COPY ./.docker/scripts/ ./scripts/
 RUN sudo chmod 755 ./scripts/webui.sh
 
 WORKDIR $WORKSPACE_ROOT

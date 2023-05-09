@@ -195,10 +195,13 @@ printf "\n%s\n" "${delimiter}"
 printf "Check out %s branch" "${SDW_BRANCH}"
 printf "\n%s\n" "${delimiter}"
 "${GIT}" fetch --all
-"${GIT}" checkout "${SDW_BRANCH}" || {
+"${GIT}" checkout -B "${SDW_BRANCH}" || {
     printf "\e[1m\e[31mERROR: Can't checkout %s branch, aborting...\e[0m" "${SDW_BRANCH}"
     exit 1
 }
+
+# Copy webui.py to the stable-diffusion directory
+cp -rf "${HOME}/scripts/src/" .
 
 # printf "\n%s\n" "${delimiter}"
 # printf "Create and activate python venv"
@@ -234,11 +237,11 @@ if [[ -n "${ACCELERATE}" ]] && [ "${ACCELERATE}" = "True" ] && [ -x "$(command -
     printf "Accelerating launch.py..."
     printf "\n%s\n" "${delimiter}"
     prepare_tcmalloc
-    exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@" --share --listen
+    exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@" --share --listen --enable-insecure-extension-access
 else
     printf "\n%s\n" "${delimiter}"
     printf "Launching launch.py..."
     printf "\n%s\n" "${delimiter}"
     prepare_tcmalloc
-    exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@" --share --listen
+    exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@" --share --listen --enable-insecure-extension-access
 fi
