@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.2.0 (2023-05-09)
+### Feature
+* **docker:** Update docker-compose and global.env files ([`ba61401`](https://github.com/entelecheia/dockerfiles/commit/ba614011dee066e4c5f5a5c582110ddaf37ccdce))
+
 ## v0.1.0 (2023-05-09)
 ### Feature
 * Initial version ([`5cf4472`](https://github.com/entelecheia/dockerfiles/commit/5cf4472fd59c8feff5a7cd7bf5fa830a9f8e2f7a))
