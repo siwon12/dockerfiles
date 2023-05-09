@@ -234,11 +234,11 @@ if [[ -n "${ACCELERATE}" ]] && [ "${ACCELERATE}" = "True" ] && [ -x "$(command -
     printf "Accelerating launch.py..."
     printf "\n%s\n" "${delimiter}"
     prepare_tcmalloc
-    exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@" --share
+    exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@" --share --listen
 else
     printf "\n%s\n" "${delimiter}"
     printf "Launching launch.py..."
     printf "\n%s\n" "${delimiter}"
     prepare_tcmalloc
-    exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@" --share
+    exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@" --share --listen
 fi
