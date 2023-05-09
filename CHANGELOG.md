@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.2.2 (2023-05-09)
+### Fix
+* **a1111:** Add webui.env file with SDW variables ([`7dc5f06`](https://github.com/entelecheia/dockerfiles/commit/7dc5f066fba30a7ef0bc38d0fe65fb5b2875d2e5))
+
 ## v0.2.1 (2023-05-09)
 ### Fix
 * **devenv:** Update development environment variables ([`24dbd8f`](https://github.com/entelecheia/dockerfiles/commit/24dbd8f9cb906c7cd5d8198cc6e514c46e1154d4))
