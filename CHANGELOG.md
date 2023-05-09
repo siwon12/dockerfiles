@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.2.4 (2023-05-09)
+### Fix
+* **docker:** Update webui.sh to remove --share flag from launch script arguments ([`945440f`](https://github.com/entelecheia/dockerfiles/commit/945440f8f6075ba345998ed4cdc43d1e1ecc6491))
+
 ## v0.2.3 (2023-05-09)
 ### Fix
 * **a1111:** Move webui.env file to a scripts directory ([`5809110`](https://github.com/entelecheia/dockerfiles/commit/5809110bd3c8e87b4c2a0cb56e8ebc994cde1ece))
