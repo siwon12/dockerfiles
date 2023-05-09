@@ -1,10 +1,38 @@
-# dockerfiles
+# Dockerfiles
+
+[![version-image]][release-url]
+[![release-date-image]][release-url]
+[![license-image]][license-url]
+
+<!-- Links: -->
+
+[pypi-image]: https://img.shields.io/pypi/v/dockerfiles
+[license-image]: https://img.shields.io/github/license/entelecheia/dockerfiles
+[license-url]: https://github.com/entelecheia/dockerfiles/blob/main/LICENSE
+[version-image]: https://img.shields.io/github/v/release/entelecheia/dockerfiles?sort=semver
+[release-date-image]: https://img.shields.io/github/release-date/entelecheia/dockerfiles
+[release-url]: https://github.com/entelecheia/dockerfiles/releases
+[jupyter-book-image]: https://jupyterbook.org/en/stable/_images/badge.svg
+[repo-url]: https://github.com/entelecheia/dockerfiles
+[pypi-url]: https://pypi.org/project/dockerfiles
+[docs-url]: https://entelecheia.github.io/dockerfiles
+[changelog]: https://github.com/entelecheia/dockerfiles/blob/main/CHANGELOG.md
+[contributing guidelines]: https://github.com/entelecheia/dockerfiles/blob/main/CONTRIBUTING.md
+
+<!-- Links: -->
+
+Dockerfiles for various projects
+
+- Documentation: [https://entelecheia.github.io/dockerfiles][docs-url]
+- GitHub: [https://github.com/entelecheia/dockerfiles][repo-url]
 
 **This repository contains Dockerfiles for various projects. Fork this repository to create your own Dockerfiles.**
 
+## Usage
+
 There are a few helper scripts that can be used to simplify the process of building and running Docker containers. These scripts are installed in the process of setting up [`dotfiles`](https://dotfiles.entelecheia.ai/) and can be found in the `.local/bin` directory.
 
-## `dockerfiles-clone` Script
+### `dockerfiles-clone` Script
 
 The `dockerfiles-clone` script is designed to help you clone or update the Dockerfiles repository on your system. To use this script, follow these steps:
 
@@ -33,7 +61,7 @@ The `dockerfiles-clone` script is designed to help you clone or update the Docke
 
 After running the `dockerfiles-clone` script, your Dockerfiles repository will be cloned or updated, and you can start using the Dockerfiles on your system.
 
-## `dockerfiles-pull` Script
+### `dockerfiles-pull` Script
 
 The `dockerfiles-pull` script helps you update the Dockerfiles repository on your system. To use this script, follow these steps:
 
@@ -59,7 +87,7 @@ The `dockerfiles-pull` script helps you update the Dockerfiles repository on you
 
 After running the `dockerfiles-pull` script, your Dockerfiles repository will be updated, and you can continue using the latest Dockerfiles on your system.
 
-## `dockerfiles-sync` Script
+### `dockerfiles-sync` Script
 
 The `dockerfiles-sync` script helps you synchronize Dockerfiles between your project directory and the shared Dockerfiles directory. To use this script, follow these steps:
 
@@ -115,7 +143,7 @@ The `dockerfiles-sync` script helps you synchronize Dockerfiles between your pro
 After running the `dockerfiles-sync` script, your Dockerfiles will be synchronized between the specified directories.
 The `dk-compose` script is a convenient wrapper for managing Docker Compose projects. To use the script, follow the usage format below:
 
-## `dk-compose` Script
+### `dk-compose` Script
 
 ```bash
 Usage: dk-compose COMMAND DOCKER_NAME [-t|--tag TAG] [--from-project] [--project-directory PROJECT_DIR] [--dockerfiles-directory DOCKERFILES_DIR] [-c|--compose-filename COMPOSE_FILENAME] [-e|--env-filename ENV_FILENAME] [-v|--version VERSION] [-l|--latest] [--push] [-n|--name CONTAINER_NAME] [--network DOCKER_NETWORK_NAME] [-u|--username USERNAME] [-h|--help]
@@ -185,3 +213,15 @@ dk-compose down my_project -t prod
 ```
 
 Remember that the `dk-compose` script should be executable and located in a directory included in the `PATH` variable (e.g., `.local/bin`).
+
+## Changelog
+
+See the [CHANGELOG] for more information.
+
+## Contributing
+
+Contributions are welcome! Please see the [contributing guidelines] for more information.
+
+## License
+
+This project is released under the [MIT License][license-url].
