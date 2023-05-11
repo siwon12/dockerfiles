@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.2.8 (2023-05-11)
+### Fix
+* **docker:** Upgrade devenv in Dockerfile.devenv and set DOCKER_NAME in docker.nvtorch.env ([`4ed0402`](https://github.com/entelecheia/dockerfiles/commit/4ed040212aa880f6fa2ddbace754efd6e7eaed1e))
+
 ## v0.2.7 (2023-05-11)
 ### Fix
 * **devenv:** Upgrade devenv to version 23.04-py3 ([`f8a91eb`](https://github.com/entelecheia/dockerfiles/commit/f8a91eb71f217623daea426ab35cc85aabcea22d))
