@@ -67,8 +67,8 @@ RUN pip install --no-cache-dir -r requirements-dev.txt
 
 # set workdir to user home
 WORKDIR /home/$USERNAME
-COPY .docker/scripts/devenv-entrypoint.sh ./
-RUN sudo chmod 755 ./devenv-entrypoint.sh
+COPY ./.docker/scripts/ ./scripts/
+RUN sudo chmod 755 ./scripts/devenv-entrypoint.sh
 
 WORKDIR $WORKSPACE_ROOT
 CMD ["zsh"]

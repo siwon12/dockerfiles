@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   workspace:
@@ -19,8 +19,8 @@ services:
     image: $IMAGE_NAME
     hostname: $CONTAINER_HOSTNAME
     command:
-      - bash 
-      - /home/$USERNAME/devenv-entrypoint.sh
+      - bash
+      - /home/$USERNAME/scripts/devenv-entrypoint.sh
     environment:
       HOST_JUPYTER_PORT: $HOST_JUPYTER_PORT
       JUPYTER_TOKEN: $JUPYTER_TOKEN
@@ -34,13 +34,14 @@ services:
       - "$HOST_SSH_PORT:22"
       - "$HOST_JUPYTER_PORT:$JUPYTER_PORT"
     volumes:
-        - "$HOME/.ssh:/home/$USERNAME/.ssh"
-        - "$HOME/.config/gh:/home/$USERNAME/.config/gh"
-        - "$HOME/.password-store:/home/$USERNAME/.password-store"
-        - "$HOME/.passage:/home/$USERNAME/.passage"
-        - "$HOME/.cache/huggingface:/home/$USERNAME/.cache/huggingface"
-        - "$HOME/.huggingface:/home/$USERNAME/.huggingface"
-        - "$WORKSPACE_ROOT:$CONTAINER_WORKSPACE_ROOT"
+      - "$HOME/.ssh:/home/$USERNAME/.ssh"
+      - "$HOME/.config/gh:/home/$USERNAME/.config/gh"
+      - "$HOME/.password-store:/home/$USERNAME/.password-store"
+      - "$HOME/.passage:/home/$USERNAME/.passage"
+      - "$HOME/.cache/huggingface:/home/$USERNAME/.cache/huggingface"
+      - "$HOME/.huggingface:/home/$USERNAME/.huggingface"
+      - "$WORKSPACE_ROOT:$CONTAINER_WORKSPACE_ROOT"
+      - "$PWD/.docker/scripts:/home/$USERNAME/scripts"
     deploy:
       resources:
         reservations:
