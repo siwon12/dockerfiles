@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.2.7 (2023-05-11)
+### Fix
+* **devenv:** Upgrade devenv to version 23.04-py3 ([`f8a91eb`](https://github.com/entelecheia/dockerfiles/commit/f8a91eb71f217623daea426ab35cc85aabcea22d))
+
 ## v0.2.6 (2023-05-09)
 ### Fix
 * Update webui.sh to copy modified code to the source dir ([`a9334fe`](https://github.com/entelecheia/dockerfiles/commit/a9334fe9088f7f0058519ab26a266c1b9fffe0db))
