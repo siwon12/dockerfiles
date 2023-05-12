@@ -6,7 +6,7 @@ ENV TZ=Asia/Seoul
 
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y fontconfig fonts-nanum curl git tzdata locales locales-all \
-        imagemagick ffmpeg sudo software-properties-common openssh-server \
+        libcairo2-dev imagemagick ffmpeg sudo software-properties-common openssh-server \
     && add-apt-repository ppa:git-core/ppa -y \
     && apt-get update \
     && apt-get -y install --no-install-recommends git \
@@ -22,6 +22,12 @@ RUN echo "Set disable_coredump false" > /etc/sudo.conf
 ARG USERNAME="dev"
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+ARG USER_FULLNAME="Dev User"
+ARG USER_EMAIL="dev@domain.com"
+ARG GITHUB_USERNAME=""
+ARG WORKSPACE_LOCATION="/"
+ARG WORKSPACE_ROOT="/workspace"
+ARG SYSTEM_HOSTNAME="dev-container"
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
@@ -33,13 +39,6 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
 # install dotfiles
-ARG USER_FULLNAME="Dev User"
-ARG USER_EMAIL="dev@domain.com"
-ARG GITHUB_USERNAME=""
-ARG WORKSPACE_LOCATION="/"
-ARG WORKSPACE_ROOT="/workspace"
-ARG SYSTEM_HOSTNAME="dev-container"
-
 ENV USER_FULLNAME $USER_FULLNAME
 ENV USER_EMAIL $USER_EMAIL
 ENV GITHUB_USERNAME $GITHUB_USERNAME
@@ -62,10 +61,6 @@ USER $USERNAME
 RUN sudo rm -rf $WORKSPACE_ROOT && sudo mkdir -p $WORKSPACE_ROOT
 RUN sudo chown -R $USERNAME:$USERNAME $WORKSPACE_ROOT
 RUN sh -c "$(wget -qO- https://dotfiles.entelecheia.ai/install)"
-
-# install requirements
-COPY .docker/scripts/requirements-dev.txt .
-RUN pip install --no-cache-dir -r requirements-dev.txt
 
 # set workdir to user home
 WORKDIR /home/$USERNAME
