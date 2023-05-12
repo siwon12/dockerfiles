@@ -11,8 +11,11 @@ RUN pip install -U setuptools
 
 # set workdir to user home
 ARG ARG_USERNAME="a1111"
+ARG ARG_WORKSPACE_ROOT="/workspace"
 ENV USERNAME $ARG_USERNAME
+ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
 RUN echo "USERNAME: $USERNAME from $ARG_USERNAME"
+RUN echo "WORKSPACE_ROOT: $WORKSPACE_ROOT from $ARG_WORKSPACE_ROOT"
 
 WORKDIR /home/$USERNAME
 COPY ./.docker/scripts/ ./scripts/
