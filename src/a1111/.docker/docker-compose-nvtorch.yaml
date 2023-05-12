@@ -6,16 +6,8 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
       args:
-        BUILD_FROM: $BUILD_FROM
-        USER_FULLNAME: $USER_FULLNAME
-        USER_EMAIL: $USER_EMAIL
-        GITHUB_USERNAME: $GITHUB_USERNAME
-        WORKSPACE_LOCATION: $CONTAINER_WORKSPACE_LOCATION
-        WORKSPACE_ROOT: $CONTAINER_WORKSPACE_ROOT
-        SYSTEM_HOSTNAME: $CONTAINER_HOSTNAME
-        USERNAME: $USERNAME
-        USER_UID: $USER_UID
-        USER_GID: $USER_GID
+        ARG_BUILD_FROM: $BUILD_FROM
+        ARG_USERNAME: $USERNAME
     image: $IMAGE_NAME
     hostname: $CONTAINER_HOSTNAME
     command:

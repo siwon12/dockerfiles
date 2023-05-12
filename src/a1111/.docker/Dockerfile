@@ -1,5 +1,5 @@
-ARG BUILD_FROM="entelecheia/devenv:latest"
-FROM $BUILD_FROM
+ARG ARG_BUILD_FROM="entelecheia/devenv:latest"
+FROM $ARG_BUILD_FROM
 
 # install requirements
 # (Optional) Makes the build much faster
@@ -10,6 +10,10 @@ RUN pip install -v -U git+https://github.com/facebookresearch/xformers.git@main#
 RUN pip install -U setuptools
 
 # set workdir to user home
+ARG ARG_USERNAME="a1111"
+ENV USERNAME $ARG_USERNAME
+RUN echo "USERNAME: $USERNAME from $ARG_USERNAME"
+
 WORKDIR /home/$USERNAME
 COPY ./.docker/scripts/ ./scripts/
 RUN sudo chmod 755 ./scripts/webui.sh
