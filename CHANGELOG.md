@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.3.0 (2023-05-12)
+### Feature
+* Add devenv-base ([`9a58fa0`](https://github.com/entelecheia/dockerfiles/commit/9a58fa06a0d869455e7c47e87496850508e950f4))
+
 ## v0.2.8 (2023-05-11)
 ### Fix
 * **docker:** Upgrade devenv in Dockerfile.devenv and set DOCKER_NAME in docker.nvtorch.env ([`4ed0402`](https://github.com/entelecheia/dockerfiles/commit/4ed040212aa880f6fa2ddbace754efd6e7eaed1e))

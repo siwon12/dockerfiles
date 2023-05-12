@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dockerfiles"
-version = "0.2.8"
+version = "0.3.0"
 description = "Dockerfiles for various projects"
 authors = ["Young Joon Lee <entelecheia@hotmail.com>"]
 license = "MIT"
