@@ -50,7 +50,7 @@ RUN sh -c "$(wget -qO- https://dotfiles.entelecheia.ai/install)"
 
 # install requirements
 COPY .docker/scripts/requirements-dev.txt .
-RUN pip install --no-cache-dir -r requirements-dev.txt
+RUN pip install -U pip && pip install --no-cache-dir -r requirements-dev.txt
 
 # set workdir to user home
 WORKDIR /home/$USERNAME
