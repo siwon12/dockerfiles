@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.4.0 (2023-05-12)
+### Feature
+* **devenv-base:** Add non-root user, dotfile installation, and requirements installation. ([`ab791bd`](https://github.com/entelecheia/dockerfiles/commit/ab791bd046b1f960e1c6e43b56f0ff0fcac1276b))
+
 ## v0.3.0 (2023-05-12)
 ### Feature
 * Add devenv-base ([`9a58fa0`](https://github.com/entelecheia/dockerfiles/commit/9a58fa06a0d869455e7c47e87496850508e950f4))
