@@ -201,7 +201,12 @@ printf "\n%s\n" "${delimiter}"
 }
 
 # Copy webui.py to the stable-diffusion directory
-cp -rf "${HOME}/scripts/src/" .
+printf "\n%s\n" "${delimiter}"
+printf "Copy webui.py to the stable-diffusion-webui directory"
+cp -rf "${HOME}/scripts/src/webui.py" "${install_dir}"/"${clone_dir}/" || {
+    printf "\e[1m\e[31mERROR: Can't copy webui.py to the stable-diffusion-webui directory, aborting...\e[0m"
+    exit 1
+}
 
 # printf "\n%s\n" "${delimiter}"
 # printf "Create and activate python venv"
