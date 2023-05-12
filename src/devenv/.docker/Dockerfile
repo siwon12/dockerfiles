@@ -1,5 +1,5 @@
-ARG BUILD_FROM="entelecheia/devenv-base:latest-nvtorch"
-FROM $BUILD_FROM
+ARG ARG_BUILD_FROM="entelecheia/devenv-base:latest-nvtorch"
+FROM $ARG_BUILD_FROM
 
 ARG ARG_USERNAME
 ARG ARG_USER_UID
