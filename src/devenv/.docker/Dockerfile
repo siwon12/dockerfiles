@@ -1,22 +1,7 @@
-ARG BUILD_FROM="pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime"
+ARG BUILD_FROM="entelecheia/devenv-base:latest-nvtorch"
 FROM $BUILD_FROM
 
-ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=Asia/Seoul
-
-RUN apt-get update \
-    && apt-get install -y fontconfig fonts-nanum curl git tzdata locales locales-all imagemagick ffmpeg sudo software-properties-common openssh-server \
-    && add-apt-repository ppa:git-core/ppa -y \
-    && apt-get update \
-    && apt-get -y install --no-install-recommends git \
-    && apt-get autoremove -y \
-    && apt-get clean -y \    
-    && rm -rf /var/lib/apt/lists/*
-
-# Set up locale
-RUN localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 || true
-# fix sudo setrlimit(RLIMIT_CORE) error
-RUN echo "Set disable_coredump false" > /etc/sudo.conf
+USER root
 
 # Add a non-root user to a container
 ARG USERNAME="dev"
@@ -33,8 +18,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
 # install dotfiles
-ARG USER_FULLNAME=""
-ARG USER_EMAIL=""
+ARG USER_FULLNAME="Dev User"
+ARG USER_EMAIL="dev@domain.com"
 ARG GITHUB_USERNAME=""
 ARG WORKSPACE_LOCATION="/"
 ARG WORKSPACE_ROOT="/workspace"
@@ -47,6 +32,8 @@ ENV WORKSPACE_LOCATION $WORKSPACE_LOCATION
 ENV WORKSPACE_ROOT $WORKSPACE_ROOT
 ENV SYSTEM_HOSTNAME $SYSTEM_HOSTNAME
 ENV DOTFILES_APPLY_ROOTMOI=0
+ENV DOTFILES_USE_CODE=1
+ENV DOTFILES_USE_PYTHON_TOOLS=1
 ENV REMOTE_CONTAINERS=1
 # ENV DOTFILES_DEBUG=1
 
