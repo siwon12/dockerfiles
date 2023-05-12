@@ -52,7 +52,6 @@ RUN sh -c "$(wget -qO- https://dotfiles.entelecheia.ai/install)"
 WORKDIR /home/$USERNAME
 COPY ./.docker/scripts/ ./scripts/
 RUN sudo chmod 755 ./scripts/devenv-entrypoint.sh
-RUN /usr/bin/python -m pip install --upgrade pip && pip install --no-cache-dir -r ./scripts/requirements-dev.txt
 
 WORKDIR $WORKSPACE_ROOT
 CMD ["zsh"]
