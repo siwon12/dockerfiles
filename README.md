@@ -15,7 +15,7 @@
 [jupyter-book-image]: https://jupyterbook.org/en/stable/_images/badge.svg
 [repo-url]: https://github.com/entelecheia/dockerfiles
 [pypi-url]: https://pypi.org/project/dockerfiles
-[docs-url]: https://entelecheia.github.io/dockerfiles
+[docs-url]: https://dotfiles.entelecheia.ai/usage/dockerfiles/
 [changelog]: https://github.com/entelecheia/dockerfiles/blob/main/CHANGELOG.md
 [contributing guidelines]: https://github.com/entelecheia/dockerfiles/blob/main/CONTRIBUTING.md
 
