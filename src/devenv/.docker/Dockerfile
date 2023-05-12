@@ -48,14 +48,11 @@ RUN sudo rm -rf $WORKSPACE_ROOT && sudo mkdir -p $WORKSPACE_ROOT
 RUN sudo chown -R $USERNAME:$USERNAME $WORKSPACE_ROOT
 RUN sh -c "$(wget -qO- https://dotfiles.entelecheia.ai/install)"
 
-# install requirements
-COPY .docker/scripts/requirements-dev.txt .
-RUN pip install -U pip && pip install --no-cache-dir -r requirements-dev.txt
-
 # set workdir to user home
 WORKDIR /home/$USERNAME
 COPY ./.docker/scripts/ ./scripts/
 RUN sudo chmod 755 ./scripts/devenv-entrypoint.sh
+RUN /usr/bin/python -m pip install --upgrade pip && pip install --no-cache-dir -r ./scripts/requirements-dev.txt
 
 WORKDIR $WORKSPACE_ROOT
 CMD ["zsh"]
