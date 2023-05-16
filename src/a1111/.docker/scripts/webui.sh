@@ -15,7 +15,7 @@ export ACCELERATE="True"
 clone_dir=${SDW_CLONE_DIR:-"stable-diffusion-webui"}
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
-#export COMMANDLINE_ARGS=""
+export COMMANDLINE_ARGS="--share --listen --enable-insecure-extension-access --xformers"
 
 # python3 executable
 #python_cmd="python3"
@@ -243,11 +243,11 @@ if [[ -n "${ACCELERATE}" ]] && [ "${ACCELERATE}" = "True" ] && [ -x "$(command -
     printf "Accelerating launch.py..."
     printf "\n%s\n" "${delimiter}"
     prepare_tcmalloc
-    exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@" --share --listen --enable-insecure-extension-access --xformers
+    exec accelerate launch --num_cpu_threads_per_process=6 "${LAUNCH_SCRIPT}" "$@"
 else
     printf "\n%s\n" "${delimiter}"
     printf "Launching launch.py..."
     printf "\n%s\n" "${delimiter}"
     prepare_tcmalloc
-    exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@" --share --listen --enable-insecure-extension-access --xformers
+    exec "${python_cmd}" "${LAUNCH_SCRIPT}" "$@"
 fi
