@@ -12,7 +12,7 @@ install_dir=${SDW_INSTALL_DIR:-"/home/$(whoami)/workspace/projects"}
 export ACCELERATE="True"
 
 # Name of the subdirectory
-#clone_dir="stable-diffusion-webui"
+clone_dir=${SDW_CLONE_DIR:-"stable-diffusion-webui"}
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
 #export COMMANDLINE_ARGS=""
@@ -193,11 +193,11 @@ cd "${install_dir}"/"${clone_dir}"/ || {
     exit 1
 }
 printf "\n%s\n" "${delimiter}"
-printf "Check out %s branch" "${SDW_BRANCH}"
+printf "Check out %s branch" "${SDW_GITHUB_BRANCH}"
 printf "\n%s\n" "${delimiter}"
 "${GIT}" fetch --all
-"${GIT}" checkout -B "${SDW_BRANCH}" || {
-    printf "\e[1m\e[31mERROR: Can't checkout %s branch, aborting...\e[0m" "${SDW_BRANCH}"
+"${GIT}" checkout -B "${SDW_GITHUB_BRANCH}" || {
+    printf "\e[1m\e[31mERROR: Can't checkout %s branch, aborting...\e[0m" "${SDW_GITHUB_BRANCH}"
     exit 1
 }
 
