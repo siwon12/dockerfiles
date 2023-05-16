@@ -36,7 +36,7 @@ export LAUNCH_SCRIPT="launch.py"
 #export BLIP_COMMIT_HASH=""
 
 # Uncomment to enable accelerated launch
-#export ACCELERATE="True"
+export ACCELERATE="True"
 
 # Uncomment to disable TCMalloc
 #export NO_TCMALLOC="True"
@@ -57,14 +57,6 @@ printf "\n%s\n" "${delimiter}"
 printf "\e[1m\e[32mInstall script for stable-diffusion + Web UI\n"
 printf "\e[1m\e[34mTested on Debian 11 (Bullseye)\e[0m"
 printf "\n%s\n" "${delimiter}"
-
-if [[ -d .git ]]; then
-    printf "\n%s\n" "${delimiter}"
-    printf "Repo already cloned, using it as install directory"
-    printf "\n%s\n" "${delimiter}"
-    install_dir="${PWD}/../"
-    clone_dir="${PWD##*/}"
-fi
 
 # Check prerequisites
 gpu_info=$(lspci 2>/dev/null | grep VGA)
@@ -107,7 +99,7 @@ else
     printf "\n%s\n" "${delimiter}"
     printf "Clone stable-diffusion-webui"
     printf "\n%s\n" "${delimiter}"
-    "${GIT} clone ${SDW_REPO_URL} ${clone_dir}"
+    "${GIT} clone https://github.com/${SDW_GITHUB_USERNAME}/${SDW_GITHUB_REPO}.git ${clone_dir}"
     cd "${clone_dir}"/ || {
         printf "\e[1m\e[31mERROR: Can't cd to %s/%s/, aborting...\e[0m" "${install_dir}" "${clone_dir}"
         exit 1
@@ -134,22 +126,6 @@ cp -rf "${HOME}/scripts/src/webui.py" "${install_dir}"/"${clone_dir}/" || {
     printf "\e[1m\e[31mERROR: Can't copy webui.py to the stable-diffusion-webui directory, aborting...\e[0m"
     exit 1
 }
-
-# printf "\n%s\n" "${delimiter}"
-# printf "Create and activate python venv"
-# printf "\n%s\n" "${delimiter}"
-# if [[ ! -d "${venv_dir}" ]]; then
-#     "${python_cmd}" -m venv "${venv_dir}"
-# fi
-# # shellcheck source=/dev/null
-# if [[ -f "${venv_dir}"/bin/activate ]]; then
-#     source "${venv_dir}"/bin/activate
-# else
-#     printf "\n%s\n" "${delimiter}"
-#     printf "\e[1m\e[31mERROR: Cannot activate python venv, aborting...\e[0m"
-#     printf "\n%s\n" "${delimiter}"
-#     exit 1
-# fi
 
 # Try using TCMalloc on Linux
 prepare_tcmalloc() {
