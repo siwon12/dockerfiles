@@ -9,6 +9,7 @@ set +o allexport
 
 # Install directory without trailing slash
 install_dir=${SDW_INSTALL_DIR:-"/home/$(whoami)/workspace/projects"}
+export ACCELERATE="True"
 
 # Name of the subdirectory
 #clone_dir="stable-diffusion-webui"
