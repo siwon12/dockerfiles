@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.6.0 (2023-05-16)
+### Feature
+* Add Neural Brushstroke docker ([`e2d1457`](https://github.com/entelecheia/dockerfiles/commit/e2d1457ad10c771b3975f26dda78079cd6de8b30))
+
 ## v0.5.0 (2023-05-16)
 ### Feature
 * Add sd-webui docker ([`65732e5`](https://github.com/entelecheia/dockerfiles/commit/65732e531a4df36c653300e7ce7780b5712d54de))
