@@ -9,25 +9,19 @@ set +o allexport
 
 # Install directory without trailing slash
 install_dir=${SDW_INSTALL_DIR:-"/home/$(whoami)/workspace/projects"}
-export ACCELERATE="True"
-
-# Name of the subdirectory
 clone_dir=${SDW_CLONE_DIR:-"stable-diffusion-webui"}
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
 export COMMANDLINE_ARGS="--share --listen --enable-insecure-extension-access --xformers"
+export PIP_IGNORE_INSTALLED=1
+export ACCELERATE="True"
 
 # python3 executable
-#python_cmd="python3"
-
+python_cmd="python3"
 # git executable
-#export GIT="git"
-
-# python3 venv without trailing slash (defaults to ${install_dir}/${clone_dir}/venv)
-# venv_dir="venv"
-
+export GIT="git"
 # script to launch to start the app
-#export LAUNCH_SCRIPT="launch.py"
+export LAUNCH_SCRIPT="launch.py"
 
 # install command for torch
 #export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
@@ -58,47 +52,6 @@ export COMMANDLINE_ARGS="--share --listen --enable-insecure-extension-access --x
 # change the variables in webui-user.sh instead #
 #################################################
 
-# Set defaults
-# Install directory without trailing slash
-if [[ -z "${install_dir}" ]]; then
-    install_dir="$(pwd)"
-fi
-
-# Name of the subdirectory (defaults to stable-diffusion-webui)
-if [[ -z "${clone_dir}" ]]; then
-    clone_dir="stable-diffusion-webui"
-fi
-
-# python3 executable
-if [[ -z "${python_cmd}" ]]; then
-    python_cmd="python3"
-fi
-
-# git executable
-if [[ -z "${GIT}" ]]; then
-    export GIT="git"
-fi
-
-# python3 venv without trailing slash (defaults to ${install_dir}/${clone_dir}/venv)
-if [[ -z "${venv_dir}" ]]; then
-    venv_dir="venv"
-fi
-
-if [[ -z "${LAUNCH_SCRIPT}" ]]; then
-    LAUNCH_SCRIPT="launch.py"
-fi
-
-# this script cannot be run as root by default
-can_run_as_root=0
-
-# read any command line flags to the webui.sh script
-while getopts "f" flag >/dev/null 2>&1; do
-    case ${flag} in
-    f) can_run_as_root=1 ;;
-    *) break ;;
-    esac
-done
-
 # Disable sentry logging
 export ERROR_REPORTING=FALSE
 
@@ -112,18 +65,6 @@ printf "\n%s\n" "${delimiter}"
 printf "\e[1m\e[32mInstall script for stable-diffusion + Web UI\n"
 printf "\e[1m\e[34mTested on Debian 11 (Bullseye)\e[0m"
 printf "\n%s\n" "${delimiter}"
-
-# Do not run as root
-if [[ $(id -u) -eq 0 && can_run_as_root -eq 0 ]]; then
-    printf "\n%s\n" "${delimiter}"
-    printf "\e[1m\e[31mERROR: This script must not be launched as root, aborting...\e[0m"
-    printf "\n%s\n" "${delimiter}"
-    exit 1
-else
-    printf "\n%s\n" "${delimiter}"
-    printf "Running on \e[1m\e[32m%s\e[0m user" "$(whoami)"
-    printf "\n%s\n" "${delimiter}"
-fi
 
 if [[ -d .git ]]; then
     printf "\n%s\n" "${delimiter}"
@@ -160,13 +101,6 @@ for preq in "${GIT}" "${python_cmd}"; do
         exit 1
     fi
 done
-
-if ! "${python_cmd}" -c "import venv" &>/dev/null; then
-    printf "\n%s\n" "${delimiter}"
-    printf "\e[1m\e[31mERROR: python3-venv is not installed, aborting...\e[0m"
-    printf "\n%s\n" "${delimiter}"
-    exit 1
-fi
 
 cd "${install_dir}"/ || {
     printf "\e[1m\e[31mERROR: Can't cd to %s/, aborting...\e[0m" "${install_dir}"
