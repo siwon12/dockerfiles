@@ -8,7 +8,7 @@ set +o allexport
 #########################################################
 
 # Install directory without trailing slash
-install_dir=${SDW_INSTALL_DIR:-"/home/$(whoami)/workspace/projects"}
+install_dir=${SDW_INSTALL_ROOT:-"/home/$(whoami)/workspace/projects"}
 clone_dir=${SDW_CLONE_DIR:-"stable-diffusion-webui"}
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
 export COMMANDLINE_ARGS="--share --listen --enable-insecure-extension-access --xformers"
