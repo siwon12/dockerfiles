@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.6.1 (2023-05-16)
+### Fix
+* Add app variant to devenv-base ([`023e487`](https://github.com/entelecheia/dockerfiles/commit/023e487f9a278edf9b4c5270852a84a803a88557))
+
 ## v0.6.0 (2023-05-16)
 ### Feature
 * Add Neural Brushstroke docker ([`e2d1457`](https://github.com/entelecheia/dockerfiles/commit/e2d1457ad10c771b3975f26dda78079cd6de8b30))
