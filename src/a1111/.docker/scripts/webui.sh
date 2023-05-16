@@ -10,12 +10,8 @@ set +o allexport
 # Install directory without trailing slash
 install_dir=${SDW_INSTALL_DIR:-"/home/$(whoami)/workspace/projects"}
 clone_dir=${SDW_CLONE_DIR:-"stable-diffusion-webui"}
-
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
 export COMMANDLINE_ARGS="--share --listen --enable-insecure-extension-access --xformers"
-export PIP_IGNORE_INSTALLED=1
-export ACCELERATE="True"
-
 # python3 executable
 python_cmd="python3"
 # git executable
@@ -45,19 +41,15 @@ export LAUNCH_SCRIPT="launch.py"
 # Uncomment to disable TCMalloc
 #export NO_TCMALLOC="True"
 
-###########################################
-
-#################################################
-# Please do not make any changes to this file,  #
-# change the variables in webui-user.sh instead #
-#################################################
-
 # Disable sentry logging
 export ERROR_REPORTING=FALSE
 
 # Do not reinstall existing pip packages on Debian/Ubuntu
 export PIP_IGNORE_INSTALLED=0
 
+export PATH="$HOME/.local/bin:$PATH"
+
+export
 # Pretty print
 delimiter="################################################################"
 
