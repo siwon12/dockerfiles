@@ -3,11 +3,11 @@ FROM $ARG_BUILD_FROM
 
 # install requirements
 # (Optional) Makes the build much faster
-RUN pip install ninja
+RUN sudo pip install -U pip setuptools
+RUN sudo pip install ninja
 # Set TORCH_CUDA_ARCH_LIST if running and building on different GPU types
 RUN pip install -v -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
 # (this can take dozens of minutes)
-RUN pip install -U setuptools
 
 # set workdir to user home
 ARG ARG_USERNAME="a1111"
@@ -19,7 +19,7 @@ RUN echo "WORKSPACE_ROOT: $WORKSPACE_ROOT from $ARG_WORKSPACE_ROOT"
 
 WORKDIR /home/$USERNAME
 COPY ./.docker/scripts/ ./scripts/
-RUN sudo chmod 755 ./scripts/webui.sh
+RUN pip install -r ./scripts/requirements.txt
 
 WORKDIR $WORKSPACE_ROOT
 CMD ["zsh"]
