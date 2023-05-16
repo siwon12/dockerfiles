@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.5.0 (2023-05-16)
+### Feature
+* Add sd-webui docker ([`65732e5`](https://github.com/entelecheia/dockerfiles/commit/65732e531a4df36c653300e7ce7780b5712d54de))
+
 ## v0.4.1 (2023-05-16)
 ### Fix
 * **a1111:** Update to v1.2.1 ([`af9eceb`](https://github.com/entelecheia/dockerfiles/commit/af9eceb5625d3b520ff28cf3f3c42cb41ca6fbd1))
