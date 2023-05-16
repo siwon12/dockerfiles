@@ -1,5 +1,9 @@
 <!--next-version-placeholder-->
 
+## v0.4.1 (2023-05-16)
+### Fix
+* **a1111:** Update to v1.2.1 ([`af9eceb`](https://github.com/entelecheia/dockerfiles/commit/af9eceb5625d3b520ff28cf3f3c42cb41ca6fbd1))
+
 ## v0.4.0 (2023-05-12)
 ### Feature
 * **devenv-base:** Add non-root user, dotfile installation, and requirements installation. ([`ab791bd`](https://github.com/entelecheia/dockerfiles/commit/ab791bd046b1f960e1c6e43b56f0ff0fcac1276b))
