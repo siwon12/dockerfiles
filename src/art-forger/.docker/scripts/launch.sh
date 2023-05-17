@@ -62,7 +62,7 @@ MODEL_DIR="${install_dir}"/"${clone_dir}"/models
 MODEL_ARCHIVE="models.zip"
 if [[ ! -d "${MODEL_DIR}" ]]; then
     printf "\n%s\n" "${delimiter}"
-    printf "Download models from %s" "${DOWNLOAD_URL}"
+    printf "Download models from Google Drive with id %s" "${GDOWN_ID}"
     printf "\n%s\n" "${delimiter}"
     # download model using gdown
     # if gdown is not installed, install it
@@ -75,6 +75,7 @@ if [[ ! -d "${MODEL_DIR}" ]]; then
     gdown -O "${MODEL_ARCHIVE}" "${GDOWN_ID}"
     # unzip model
     unzip "${MODEL_ARCHIVE}" -d .
+    rm "${MODEL_ARCHIVE}"
 fi
 
 printf "\n%s\n" "${delimiter}"
