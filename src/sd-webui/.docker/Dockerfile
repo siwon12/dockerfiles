@@ -58,7 +58,7 @@ RUN sudo pip config set global.trusted-host \
 # Installs Python packages required for the build
 RUN sudo pip install -U pip setuptools
 # Optional: Installs Ninja for faster builds
-RUN sudo pip install ninja
+# RUN sudo pip install ninja
 # Installs xformers from Facebook research
 RUN pip install -v -U git+https://github.com/facebookresearch/xformers.git@main#egg=xformers
 
