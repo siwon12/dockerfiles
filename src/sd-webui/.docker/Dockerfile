@@ -7,9 +7,9 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Updates the image and installs necessary packages
 RUN apt-get update \
     && apt-get install -y curl sudo \
-        fontconfig fonts-nanum tzdata locales locales-all \
-        google-perftools libcairo2-dev imagemagick ffmpeg \
-        software-properties-common openssh-server \
+    fontconfig fonts-nanum tzdata locales locales-all \
+    google-perftools libcairo2-dev imagemagick ffmpeg \
+    software-properties-common openssh-server \
     # Adds PPA for the latest git version
     && add-apt-repository ppa:git-core/ppa -y \
     && apt-get update \
@@ -47,6 +47,13 @@ USER $USERNAME
 # Sets up the workspace for the user
 RUN sudo rm -rf $WORKSPACE_ROOT && sudo mkdir -p $WORKSPACE_ROOT/projects
 RUN sudo chown -R $USERNAME:$USERNAME $WORKSPACE_ROOT
+
+RUN pip config set global.trusted-host \
+        "pypi.org files.pythonhosted.org pypi.python.org pypi.ngc.nvidia.com" \
+        --trusted-host=pypi.python.org \
+        --trusted-host=pypi.org \
+        --trusted-host=files.pythonhosted.org \
+        --trusted-host=pypi.ngc.nvidia.com
 
 # Installs Python packages required for the build
 RUN sudo pip install -U pip setuptools
