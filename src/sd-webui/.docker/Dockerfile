@@ -48,7 +48,7 @@ USER $USERNAME
 RUN sudo rm -rf $WORKSPACE_ROOT && sudo mkdir -p $WORKSPACE_ROOT/projects
 RUN sudo chown -R $USERNAME:$USERNAME $WORKSPACE_ROOT
 
-RUN pip config set global.trusted-host \
+RUN sudo pip config set global.trusted-host \
         "pypi.org files.pythonhosted.org pypi.python.org pypi.ngc.nvidia.com" \
         --trusted-host=pypi.python.org \
         --trusted-host=pypi.org \
