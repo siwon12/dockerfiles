@@ -1,55 +1,39 @@
-ARG ARG_BUILD_FROM="nvcr.io/nvidia/pytorch:23.04-py3"
+# Sets the base image for subsequent instructions
+ARG ARG_BUILD_FROM="nvcr.io/nvidia/pytorch:23.02-py3"
 FROM $ARG_BUILD_FROM
 
+# Setting this argument prevents interactive prompts during the build process
 ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=Asia/Seoul
-
-RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y fontconfig fonts-nanum curl git tzdata locales locales-all \
-        libcairo2-dev imagemagick ffmpeg sudo software-properties-common openssh-server \
+# Updates the image and installs necessary packages
+RUN apt-get update \
+    && apt-get install -y curl sudo \
+    fontconfig fonts-nanum tzdata locales locales-all \
+    google-perftools libcairo2-dev imagemagick ffmpeg \
+    software-properties-common openssh-server \
+    # Adds PPA for the latest git version
     && add-apt-repository ppa:git-core/ppa -y \
     && apt-get update \
     && apt-get -y install --no-install-recommends git \
+    # Cleans up unnecessary packages to reduce image size
     && apt-get autoremove -y \
     && apt-get clean -y
 
-# Set up locale
+# Sets up the locale to en_US.UTF-8
 RUN localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 || true
-# fix sudo setrlimit(RLIMIT_CORE) error
+# Fixes sudo error related to core dumps
 RUN echo "Set disable_coredump false" > /etc/sudo.conf
 
-# Add a non-root user to a container
-ARG ARG_USERNAME="dev"
+# Setting ARGs and ENVs for user creation and workspace setup
+ARG ARG_USERNAME="app"
 ARG ARG_USER_UID=1000
 ARG ARG_USER_GID=$ARG_USER_UID
-ARG ARG_USER_FULLNAME="Dev User"
-ARG ARG_USER_EMAIL="dev@domain.com"
-ARG ARG_GITHUB_USERNAME=""
-ARG ARG_SYSTEM_HOSTNAME="dev-container"
-ARG ARG_WORKSPACE_LOCATION="/"
 ARG ARG_WORKSPACE_ROOT="/workspace"
-
 ENV USERNAME $ARG_USERNAME
 ENV USER_UID $ARG_USER_UID
 ENV USER_GID $ARG_USER_GID
-ENV USER_FULLNAME $ARG_USER_FULLNAME
-ENV USER_EMAIL $ARG_USER_EMAIL
-ENV GITHUB_USERNAME $ARG_GITHUB_USERNAME
-ENV SYSTEM_HOSTNAME $ARG_SYSTEM_HOSTNAME
-ENV WORKSPACE_LOCATION $ARG_WORKSPACE_LOCATION
 ENV WORKSPACE_ROOT $ARG_WORKSPACE_ROOT
-# print all args to check
-RUN echo "USERNAME: $USERNAME from $ARG_USERNAME"
-RUN echo "USER_UID: $USER_UID from $ARG_USER_UID"
-RUN echo "USER_GID: $USER_GID from $ARG_USER_GID"
-RUN echo "USER_FULLNAME: $USER_FULLNAME from $ARG_USER_FULLNAME"
-RUN echo "USER_EMAIL: $USER_EMAIL from $ARG_USER_EMAIL"
-RUN echo "GITHUB_USERNAME: $GITHUB_USERNAME from $ARG_GITHUB_USERNAME"
-RUN echo "SYSTEM_HOSTNAME: $SYSTEM_HOSTNAME from $ARG_SYSTEM_HOSTNAME"
-RUN echo "WORKSPACE_LOCATION: $WORKSPACE_LOCATION from $ARG_WORKSPACE_LOCATION"
-RUN echo "WORKSPACE_ROOT: $WORKSPACE_ROOT from $ARG_WORKSPACE_ROOT"
 
-# Create the user
+# Creates a non-root user with sudo privileges
 RUN groupadd --gid $USER_GID $USERNAME \
     && adduser --uid $USER_UID --gid $USER_GID --force-badname --disabled-password --gecos "" $USERNAME  \
     && echo "$USERNAME:$USERNAME" | chpasswd \
@@ -58,28 +42,39 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
-# install dotfiles
+# Switches to the newly created user
+USER $USERNAME
+# Sets up the workspace for the user
+RUN sudo rm -rf $WORKSPACE_ROOT && sudo mkdir -p $WORKSPACE_ROOT/projects
+RUN sudo chown -R $USERNAME:$USERNAME $WORKSPACE_ROOT
+
+# Install dotfiles
+ARG ARG_USER_FULLNAME
+ARG ARG_USER_EMAIL
+ARG ARG_GITHUB_USERNAME
+ARG ARG_SYSTEM_HOSTNAME
+ARG ARG_WORKSPACE_LOCATION="/"
+ARG ARG_DOTFILES_VERSION="0.1.0"
+ENV USER_FULLNAME $ARG_USER_FULLNAME
+ENV USER_EMAIL $ARG_USER_EMAIL
+ENV GITHUB_USERNAME $ARG_GITHUB_USERNAME
+ENV SYSTEM_HOSTNAME $ARG_SYSTEM_HOSTNAME
+ENV WORKSPACE_LOCATION $ARG_WORKSPACE_LOCATION
+ENV DOTFILES_VERSION $ARG_DOTFILES_VERSION
+
 ENV DOTFILES_APPLY_ROOTMOI=0
 ENV DOTFILES_USE_CODE=1
 ENV DOTFILES_USE_PYTHON_TOOLS=1
 ENV REMOTE_CONTAINERS=1
-# ENV DOTFILES_DEBUG=1
 
-ENV PIP_DEFAULT_TIMEOUT 100
-ENV DS_BUILD_FUSED_ADAM 1
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV KMP_DUPLICATE_LIB_OK TRUE
-
-USER $USERNAME
-RUN sudo rm -rf $WORKSPACE_ROOT && sudo mkdir -p $WORKSPACE_ROOT
-RUN sudo chown -R $USERNAME:$USERNAME $WORKSPACE_ROOT
 RUN sh -c "$(wget -qO- https://dotfiles.entelecheia.ai/install)"
 
-# set workdir to user home
-WORKDIR /home/$USERNAME
-COPY ./.docker/scripts/ ./scripts/
-RUN sudo chmod 755 ./scripts/devenv-entrypoint.sh
-
+# Sets the working directory to workspace root
 WORKDIR $WORKSPACE_ROOT
+# Copies scripts from host into the image
+COPY ./.docker/scripts/ ./scripts/
+
+# Sets the time zone within the container
+ENV TZ=Asia/Seoul
+
 CMD ["zsh"]
